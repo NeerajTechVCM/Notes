@@ -12,7 +12,7 @@ if(process.env.NODE_ENV !="production"){
     require('dotenv').config();
   }
 app.use(express.json());
-app.use(cookieParser());
+
 app.use(
     cors({
       origin: "http://localhost:5173",
@@ -20,6 +20,7 @@ app.use(
       credentials: true,
     })
   );
+  app.use(cookieParser());
 app.post('/register',AuthRouter.register)
 app.post('/login',AuthRouter.login)
 app.post('/logout',AuthRouter.logoutUser)
