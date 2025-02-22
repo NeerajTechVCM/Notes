@@ -1,4 +1,5 @@
-import Navbar from '@/components/navbar'
+
+import Navbar from '@/components/Navbar'
 import Notes from '@/components/Notes'
 import React from 'react'
 
