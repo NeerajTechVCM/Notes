@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from './ui/input';
 import { FiSearch } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
-import { useSearch } from './context/searchNoteContext';
+import { useSearch } from '@/context/SearchNoteContext';
+
 export default function Navbar() {
   const navigate = useNavigate();
   const [query,setQuery] = useState("");

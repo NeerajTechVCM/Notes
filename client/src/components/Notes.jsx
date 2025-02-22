@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useSearch } from './context/searchNoteContext';
+import { useSearch } from '@/context/SearchNoteContext';
+
 export default function Notes() {
   const [Notes, setNotes] = useState([])
  const [formData, setFormData] = useState({
