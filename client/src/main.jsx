@@ -5,9 +5,12 @@ import App from './App.jsx'
 import SearchProvider from './components/context/searchNoteContext'
 import { BrowserRouter as Router} from 'react-router-dom'
 createRoot(document.getElementById('root')).render(
-  <SearchProvider>
+  
   <Router>
-  <App />
+    <SearchProvider>
+        <App />
+    </SearchProvider>
+
   </Router>
-  </SearchProvider>,
+ 
 )
