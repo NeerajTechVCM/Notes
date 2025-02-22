@@ -20,7 +20,7 @@ export default function Navbar() {
     e.preventDefault();
   
   
-    const result=await fetch(`http://localhost:8080/search/${query}`,{
+    const result=await fetch(`/search/${query}`,{
         method:"GET",
         headers:{
             "Content-Type":'application/json',
@@ -44,7 +44,7 @@ export default function Navbar() {
 
 
 const handleLogout = async ()=>{
-  const result = await fetch("http://localhost:8080/logout", {
+  const result = await fetch("/logout", {
     method: "POST",
     headers: {
       "Content-Type": 'application/json'

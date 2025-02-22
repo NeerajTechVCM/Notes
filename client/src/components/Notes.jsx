@@ -24,7 +24,7 @@ export default function Notes() {
   console.log(searchResults)
   useEffect(() => {
     const fetchAllNotes = async () => {
-      const result = await fetch("http://localhost:8080/getAllNotes", {
+      const result = await fetch("/getAllNotes", {
         method: "GET",
         headers: {
           "Content-Type": 'application/json'
@@ -54,7 +54,7 @@ export default function Notes() {
   }
   const handleSubmit = async(event)=>{
     event.preventDefault();
-    const result=await fetch("http://localhost:8080/addNote",{
+    const result=await fetch("/addNote",{
      method:"POST",
      headers:{
          "Content-Type":'application/json'

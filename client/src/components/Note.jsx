@@ -38,7 +38,7 @@ export default function Note({note}) {
   }
   const handleSubmit = async(event)=>{
     event.preventDefault();
-    const result=await fetch(`http://localhost:8080/updateNote/${note._id}`,{
+    const result=await fetch(`/updateNote/${note._id}`,{
      method:"PUT",
      headers:{
          "Content-Type":'application/json'
@@ -58,7 +58,7 @@ export default function Note({note}) {
  })
   }
   const handleDeleteNote = async()=>{
-    const result=await fetch(`http://localhost:8080/deleteNote/${note._id}`,{
+    const result=await fetch(`/deleteNote/${note._id}`,{
       method:"DELETE",
       headers:{
           "Content-Type":'application/json'
