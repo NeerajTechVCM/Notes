@@ -90,6 +90,22 @@ export default function Note({note}) {
     toast.error(data.message)
   }
   }
+
+
+  const createdAt = new Date(note.createdAt);
+
+
+const formattedDateTime = createdAt.toLocaleDateString([], {
+  year: "numeric",
+  month: "long",  // Use "2-digit" if you want numeric months (e.g., "02")
+  day: "2-digit",
+}) + " at " + createdAt.toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+});
+
+
+
   return (
     <>
     <Toaster/>
@@ -99,7 +115,7 @@ export default function Note({note}) {
 
   </CardHeader>
   <CardContent>
-    <p>{new Date(note.createdOn).toLocaleString()}</p>
+    <p>{formattedDateTime}</p>
     <p style={{ wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "pre-wrap" }}>{note.content}</p>
 
   </CardContent>
