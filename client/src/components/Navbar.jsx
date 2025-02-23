@@ -5,6 +5,7 @@ import { Input } from './ui/input';
 import { FiSearch } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import { useSearch } from '@/context/SearchNoteContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -35,9 +36,11 @@ export default function Navbar() {
    
     if(data.success){
       setSearchResults(data.Notes)
+      toast.success(data.message)
   
-  
-    
+  }
+  else{
+    toast.error(data.message)
   }
     setQuery("")
   }
@@ -55,17 +58,19 @@ const handleLogout = async ()=>{
   const data = await result.json();
   console.log(data);
   if (data.success) {
-
+    toast.success(data.message)
 
     navigate("/login");
 
   } else {
     navigate("/");
+    toast.error(data.message)
   }
 }
 
   return (
     <>
+    <Toaster/>
       <div className="flex justify-between items-center w-full text-2xl bg-blue-200 p-4">
      <div>
       Notes

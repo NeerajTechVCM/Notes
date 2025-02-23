@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useSearch } from '@/context/SearchNoteContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Notes() {
   const [Notes, setNotes] = useState([])
@@ -21,6 +22,7 @@ export default function Notes() {
     tags: ""
   });
   const [searchResults,setSearchResults] = useSearch();
+
   console.log(searchResults)
   useEffect(() => {
     const fetchAllNotes = async () => {
@@ -65,7 +67,16 @@ export default function Notes() {
  const data=await result.json();
  console.log(data);
  if(data.success){
-  window.location.reload();
+  
+
+  toast.success(data.message)
+  setTimeout(function() {
+    window.location.reload();
+  },1000);
+
+
+}else{
+  toast.error(data.message)
 }
  setFormData({
  title:"",
@@ -77,6 +88,7 @@ export default function Notes() {
   const displayNotes = searchResults.length > 0 ? searchResults : Notes;
   return (
     <>
+    <Toaster/>
       <div className="flex flex-wrap w-full h-auto p-4 gap-4 justify-center items-center">
 
         

@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 import React, { useState } from 'react'
+import toast, { Toaster, ToastIcon } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -36,12 +37,13 @@ export default function Login() {
     const data = await result.json();
     console.log(data);
     if (data.success) {
-
+toast.success(data.message)
 
       navigate("/");
 
     } else {
       navigate("/login");
+      toast.error(data.message)
     }
     setFormData({
 
@@ -53,6 +55,7 @@ export default function Login() {
 }
 return (
   <>
+  <Toaster/>
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-2xl font-semibold text-center text-red-700 mb-6">Login</h2>

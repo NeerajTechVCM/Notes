@@ -19,7 +19,10 @@ import {
   import { Button } from "@/components/ui/button"
   import { CiEdit } from "react-icons/ci";
   import { MdDeleteOutline } from "react-icons/md";
+import toast, { Toaster } from 'react-hot-toast'
+
 export default function Note({note}) {
+
   const [formData, setFormData] = useState({
     title: "",
       content: "",
@@ -49,7 +52,14 @@ export default function Note({note}) {
  const data=await result.json();
  console.log(data);
  if(data.success){
-  window.location.reload();
+
+  toast.success(data.message)
+  setTimeout(function() {
+    window.location.reload();
+  },1000);
+
+}else{
+  toast.error(data.message)
 }
  setFormData({
  title:"",
@@ -69,10 +79,20 @@ export default function Note({note}) {
   const data=await result.json();
   console.log(data);
   if(data.success){
-    window.location.reload();
+
+    toast.success(data.message)
+    setTimeout(function() {
+      window.location.reload();
+    },1000);
+  
+  }
+  else{
+    toast.error(data.message)
   }
   }
   return (
+    <>
+    <Toaster/>
     <Card className={'lg:w-[30%]  md:w-[40%] w-full '}>
   <CardHeader>
     <CardTitle>{note.title}</CardTitle>
@@ -135,6 +155,6 @@ export default function Note({note}) {
 <MdDeleteOutline style={{fontSize:"25px"}}  className='cursor-pointer' onClick={handleDeleteNote} /></div>
   </CardFooter>
 </Card>
-
+</>
   )
 }
