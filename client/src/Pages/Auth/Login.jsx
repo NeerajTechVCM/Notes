@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useAuth } from '@/context/AuthProvider';
 
 import React, { useState } from 'react'
 import toast, { Toaster, ToastIcon } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  
+  const [auth,setAuth]=useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,6 +40,8 @@ export default function Login() {
     const data = await result.json();
     console.log(data);
     if (data.success) {
+      localStorage.setItem("auth",JSON.stringify(data));
+      setAuth(data);
 toast.success(data.message)
 
       navigate("/");

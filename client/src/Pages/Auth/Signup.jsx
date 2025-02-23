@@ -1,11 +1,14 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useAuth } from '@/context/AuthProvider';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 export default function signup() {
+  
+  const [auth,setAuth]=useAuth();
   const [formData,setFormData] = useState({
     name:"",
     email:"",
@@ -37,7 +40,8 @@ console.log(formData)
 const data=await result.json();
 console.log(data);
 if (data.success) {
-
+  localStorage.setItem("auth",JSON.stringify(data));
+  setAuth(data);
   toast.success(data.message)
   navigate("/");
 

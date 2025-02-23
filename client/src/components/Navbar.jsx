@@ -6,9 +6,11 @@ import { FiSearch } from "react-icons/fi";
 import { CiLogout } from "react-icons/ci";
 import { useSearch } from '@/context/SearchNoteContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '@/context/AuthProvider';
 
 export default function Navbar() {
   const navigate = useNavigate();
+   const [auth,setAuth]=useAuth();
   const [query,setQuery] = useState("");
   const [searchResults,setSearchResults] = useSearch();
 
@@ -47,6 +49,8 @@ export default function Navbar() {
 
 
 const handleLogout = async ()=>{
+  localStorage.clear();
+setAuth("");
   const result = await fetch("/logout", {
     method: "POST",
     headers: {
