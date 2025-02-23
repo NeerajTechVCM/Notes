@@ -82,7 +82,7 @@ setAuth("");
 
     <form onSubmit={handleSubmit} >
     <div className="flex space-x-3 justify-center items-center">
-      <Input placeholder="Search..." value={query} onChange={searchHandler} />
+      <Input placeholder="Search Tags..." value={query} onChange={searchHandler} />
    <button type='submit'> 
    <FiSearch style={{fontSize:"25px"}} />
    </button>

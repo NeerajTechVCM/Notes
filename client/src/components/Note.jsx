@@ -102,6 +102,7 @@ const formattedDateTime = createdAt.toLocaleDateString([], {
 }) + " at " + createdAt.toLocaleTimeString([], {
   hour: "2-digit",
   minute: "2-digit",
+  second:"2-digit",
 });
 
 
@@ -115,12 +116,17 @@ const formattedDateTime = createdAt.toLocaleDateString([], {
 
   </CardHeader>
   <CardContent>
-    <p>{formattedDateTime}</p>
-    <p style={{ wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "pre-wrap" }}>{note.content}</p>
+
+
+   <p style={{ wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "pre-wrap" }}><span className='text-lg'>Content:</span>  
+  {note.content}</p>
 
   </CardContent>
   <CardFooter className={'flex justify-between'} style={{ wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "pre-wrap" }}>
-    <p>{note.tags}</p>
+<div className='flex flex-col gap-3'>
+<p><span className='text-lg'>Tags:</span> {note.tags}</p>
+<p><span className='text-lg'>Create Date:</span> {formattedDateTime}</p>
+</div>
 <div className='space-x-3 flex'> 
 
 
