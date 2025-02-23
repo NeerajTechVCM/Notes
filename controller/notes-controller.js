@@ -136,7 +136,8 @@ module.exports.deleteNote = async(req,res)=>{
 
 
 module.exports.searchNotes = async (req, res) => {
-
+ 
+  const userId = req.user.id;
   const { query}=req.params; 
   console.log(query);
 
@@ -146,7 +147,7 @@ module.exports.searchNotes = async (req, res) => {
 
   try {
    
-    const Notes= await Note.find({ tags: { $regex: query, $options: 'i' }} ).limit(10);
+    const Notes= await Note.find(  { $and: [ { userId:userId }, {tags: { $regex: query, $options: 'i' }} ] }).limit(10);
     console.log(Notes)
   
     if (Notes.length > 0) {
