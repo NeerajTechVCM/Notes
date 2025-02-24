@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Note from './Note'
+import { CiLogout } from "react-icons/ci";
 import { CiCirclePlus } from "react-icons/ci";
 import {
   Dialog,
@@ -13,9 +14,13 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useSearch } from '@/context/SearchNoteContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '@/context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 export default function Notes() {
   const [Notes, setNotes] = useState([])
+    const [auth,setAuth]=useAuth();
+    const navigate = useNavigate();
  const [formData, setFormData] = useState({
   title: "",
     content: "",
@@ -54,6 +59,30 @@ export default function Notes() {
     })
   
   }
+  const handleLogout = async ()=>{
+    localStorage.clear();
+  setAuth("");
+    const result = await fetch("/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": 'application/json'
+      },
+   
+      credentials: 'include',
+    });
+    const data = await result.json();
+    console.log(data);
+    if (data.success) {
+      toast.success(data.message)
+  
+      navigate("/login");
+  
+    } else {
+      navigate("/");
+      toast.error(data.message)
+    }
+  }
+  
   const handleSubmit = async(event)=>{
     event.preventDefault();
     const result=await fetch("/addNote",{
@@ -110,7 +139,7 @@ export default function Notes() {
       <Dialog>
   <DialogTrigger>
   <CiCirclePlus
-        className="fixed bottom-6 right-6 text-4xl cursor-pointer bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-all"
+        className="fixed bottom-6 right-16 text-4xl cursor-pointer bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-all"
     
       />
   </DialogTrigger>
@@ -152,7 +181,7 @@ export default function Notes() {
         </DialogContent>
 
 </Dialog>
-
+<CiLogout className='fixed bottom-6 right-6 text-4xl cursor-pointer bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-all '  onClick={handleLogout}  />
     
     </>
   );

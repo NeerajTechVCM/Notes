@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Input } from './ui/input';
 import { FiSearch } from "react-icons/fi";
-import { CiLogout } from "react-icons/ci";
+
 import { useSearch } from '@/context/SearchNoteContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '@/context/AuthProvider';
@@ -48,40 +48,17 @@ export default function Navbar() {
   }
 
 
-const handleLogout = async ()=>{
-  localStorage.clear();
-setAuth("");
-  const result = await fetch("/logout", {
-    method: "POST",
-    headers: {
-      "Content-Type": 'application/json'
-    },
- 
-    credentials: 'include',
-  });
-  const data = await result.json();
-  console.log(data);
-  if (data.success) {
-    toast.success(data.message)
-
-    navigate("/login");
-
-  } else {
-    navigate("/");
-    toast.error(data.message)
-  }
-}
 
   return (
     <>
     <Toaster/>
-      <div className="flex justify-between items-center w-full text-2xl bg-blue-200 p-4">
+      <div className="flex justify-between items-center gap-2 w-full text-2xl bg-blue-200 p-4">
      <div>
       Notes
      </div>
 
     <form onSubmit={handleSubmit} >
-    <div className="flex space-x-3 justify-center items-center">
+    <div className="flex space-x-2 justify-center items-center">
       <Input placeholder="Search Tags..." value={query} onChange={searchHandler} />
    <button type='submit'> 
    <FiSearch style={{fontSize:"25px"}} />
@@ -89,7 +66,7 @@ setAuth("");
      </div>
     </form>
      <div>
-     <CiLogout className='cursor-pointer' style={{fontSize:"25px"}} onClick={handleLogout}  />
+
    
      </div>
       </div>
