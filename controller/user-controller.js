@@ -55,7 +55,7 @@ module.exports.register = async (req, res) => {
     const expireDate = new Date();
     expireDate.setDate(expireDate.getDate() + 5);  // 5 days from today
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: false, // Set to true in production when using https
       expires: expireDate,
       path: "/",
@@ -115,7 +115,7 @@ module.exports.login = async (req, res) => {
       const expireDate = new Date();
       expireDate.setDate(expireDate.getDate() + 5);  // 5 days from today
       res.cookie("token", token, {
-        httpOnly: true,
+        httpOnly: false,
         secure: false, // Set to true in production when using https
         expires: expireDate,
         path: "/",
